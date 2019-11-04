@@ -1,5 +1,5 @@
 # Price Prediction for Video Games
------------------------------
+----------------------------------
 [Pictures here]
 This project aims to provide analysis on video games price prediction using machine learning tools. By using the information on games such as genres and developer names, we are able to predict prices to a certain extent. This document will briefly explain the following:
 
@@ -18,6 +18,7 @@ This project aims to provide analysis on video games price prediction using mach
 
 ##### Install the Requirements
   Install the requirements using ```pip install -r requirements.txt```
+  
   2 third-party packages are essential for this project:
    - Api for rawg
    - Glove-python

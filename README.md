@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Price Prediction for Video Games
 
 [Pictures here]

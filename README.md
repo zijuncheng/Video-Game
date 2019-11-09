@@ -3,7 +3,7 @@
 This project aims to provide prediction on second hand video games using machine learning tools. By using information such as genres and developer names, we are able to predict prices to a certain extent (but only to a certain extent). Here are some examples: 
 
 
-| <img src="fifa_18.jpg" align="center" style="height: 250px"/>        | <img src="new_super_mario_bros.jpg" align="center" style="height: 250px"/>            |<img src="assassins_creed_3.jpg" align="center" style="height: 250px"/> |
+| <img src="fifa_18.jpg" align="center" style="height: 500px"/>        | <img src="new_super_mario_bros.jpg" align="center" style="height: 200px"/>            |<img src="assassins_creed_3.jpg" align="center" style="height: 200px"/> |
 | ------------- |:-------------:| -----:|
 | price @ $17.8 prediction @ $18.04 *   | price @ $43.5 prediction @ $40.08 *| price @ $7.7 prediction @ $17 *|
 
@@ -121,9 +121,9 @@ Finally, the model chosen is XGBoost on tfidf word vectors due to it's relativel
 
 It is worth noting that while the prediction works with some games, the errors are larger in expensive games and games that are similar to best sellers in terms of titles.
 
-<img src="absolute_error_by_price.PNG" align="center" style="height: 250px"/>  
+<img src="absolute_error_by_price.png" align="center" style="height: 250px"/>  
 
-<img src="sim_score_results.PNG" align="center" style="height: 250px"/> 
+<img src="sim_score_results.png" align="center" style="height: 250px"/> 
 
 This might explain the fact that predictions on many big franchise names tend to have an above average error. As these games are popular, many sequels can be issued and some of them might not be so impressive (ex., assassin's creed 3 compared to its predecessors or the more recent versions such as origins or odysseys). It is also worth pointing out that franchise games are more likely to issue special edition for collectors (i.e., limited collections, collector's edition, etc) that up skews the price tag while a normal edition with only the game content would cost much less. One example would be that "assassins creed brotherhood collectors edition" is priced on average at $64 while the normal edition is $7. The collector's value is a factor that is hard to assess.
 

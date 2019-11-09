@@ -4,7 +4,7 @@ This project aims to provide prediction on second hand video games using machine
 
 
 | <img src="fifa_18.jpg" align="center" style="height: 200px"/>        | <img src="new_super_mario_bros.jpg" align="center" style="height: 200px"/>            |<img src="assassins_creed_3.jpg" align="center" style="height: 200px"/> |
-| ------------- |:-------------:| -----:|
+| --- |---| --- |
 | price @ $17.8 prediction @ $18.04 *   | price @ $43.5 prediction @ $40.08 *| price @ $7.7 prediction @ $17 *|
 
 *Pictures are all from google. Prices are the average of ones from all available platforms

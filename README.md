@@ -102,7 +102,7 @@ The baseline has a mean absolute error of $16.35 and a standard deviation of $ 1
 Please find below the mean absolute error for each of the model:
 
 |data/model | RF     | XGBoost      |Linear| SVR      |
-|---- | ------------ | ------------|
+|---- | --- | --- | --- | --- |
 |only Similarity Score    | 18.66      | 16.27  | 18.16 | 16.02
 |+mean word vectors   | 16.97 | 16.12 | 17.73| 16.15
 |+tfidf word vectors   | 16.92       | 16.54 |17.77|16.18|
@@ -111,7 +111,7 @@ Please find below the mean absolute error for each of the model:
 The standard deviation of the prediction absolute error:
 
 |data/model | RF     | XGBoost      |Linear| SVR      |
-|---- | ------------ | ------------|
+|---- | --- | ---| --- | --- |
 |only Similarity Score    | 19.57      | 16.75  | 16.27 | 18.07
 |+mean word vectors   | 15.78 | 17.43 | 16.21| 18.41
 |+tfidf word vectors   | 15.51      | 16.1 |16.23|18.48|

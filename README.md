@@ -3,7 +3,7 @@
 This project aims to provide prediction on second hand video games using machine learning tools. By using information such as genres and developer names, we are able to predict prices to a certain extent (but only to a certain extent). Here are some examples: 
 
 
-| <img src="fifa_18.jpg" align="center" style="height: 200px"/>        | <img src="new_super_mario_bros.jpg" align="center" style="height: 200px"/>            |<img src="assassins_creed_3.jpg" align="center" style="height: 200px"/> |
+| <img src="pics/fifa_18.jpg" align="center" style="height: 200px"/>        | <img src="pics/new_super_mario_bros.jpg" align="center" style="height: 200px"/>            |<img src="pics/assassins_creed_3.jpg" align="center" style="height: 200px"/> |
 | --- |---| --- |
 | price @ $17.8 prediction @ $18.04 *   | price @ $43.5 prediction @ $40.08 *| price @ $7.7 prediction @ $17 *|
 
@@ -55,7 +55,7 @@ Please refer to the links above if you run into any problem.
   - More often, we have true outliers such as the following:
   
   
-    <img src="turf_neo_game.PNG" align="center" style="height: 250px"/> 
+    <img src="pics/turf_neo_game.PNG" align="center" style="height: 250px"/> 
   
   
   
@@ -63,7 +63,7 @@ Please refer to the links above if you run into any problem.
     - The price seems to make sense as the game in our database is probably the one with the original console (the aes system with home catridge) which is extremely rare and highly sought after. As a side note, the game manual alone on AES system is listed about $1500 on [ebay](ebay)
     
  
-        <img src="ebay_pic.PNG" align="center" style="height: 250px"/>    
+        <img src="pics/ebay_pic.PNG" align="center" style="height: 250px"/>    
 
    - Both kinds of outliers have been filtered using the inter-quatnile range method where any points beyond 1.5 times the 25-75 quantiles range are deleted.
    
@@ -121,9 +121,9 @@ Finally, the model chosen is XGBoost on tfidf word vectors due to it's relativel
 
 It is worth noting that while the prediction works with some games, the errors are larger in expensive games and games that are similar to best sellers in terms of titles.
 
-<img src="absolute_error_by_price.png" align="center" style="height: 250px"/>  
+<img src="pics/absolute_error_by_price.png" align="center" style="height: 250px"/>  
 
-<img src="sim_score_results.png" align="center" style="height: 250px"/> 
+<img src="pics/sim_score_results.png" align="center" style="height: 250px"/> 
 
 This might explain the fact that predictions on many big franchise names tend to have an above average error. As these games are popular, many sequels can be issued and some of them might not be so impressive (ex., assassin's creed 3 compared to its predecessors or the more recent versions such as origins or odysseys). It is also worth pointing out that franchise games are more likely to issue special edition for collectors (i.e., limited collections, collector's edition, etc) that up skews the price tag while a normal edition with only the game content would cost much less. One example would be that "assassins creed brotherhood collectors edition" is priced on average at $64 while the normal edition is $7. The collector's value is a factor that is hard to assess.
 

@@ -1,13 +1,14 @@
 # Price Prediction for Video Games
 
-This project aims to provide machine leaning based prediction of second-hand video game prices using limited internet data sources. By using information such as genres and developer names, the algorithms are able to predict prices to a certain extent. Here are some results based on the best model: 
+This project provides machine-leaning based prediction of second-hand video game prices by using limited internet data sources. By using information such as genres and developer names, the algorithms are able to predict prices to a certain extent. Here are some results based on the best model: 
 
 
 | <img src="pics/fifa_18.jpg" align="center" style="height: 200px"/>        | <img src="pics/new_super_mario_bros.jpg" align="center" style="height: 200px"/>            |<img src="pics/assassins_creed_3.jpg" align="center" style="height: 200px"/> |
 | --- |---| --- |
-| price @ $17.8 prediction @ $18.04 *   | price @ $43.5 prediction @ $40.08 *| price @ $7.7 prediction @ $17 *|
+| price @ $17.8   | price @ $43.5 | price @ $7.7 |
+|prediction @ $18.04 * |prediction @ $40.08 * |prediction @ $17 *|
 
-*Pictures are all from google. Prices are averages of the titles from all available platforms.
+*All pictures are from google. Prices are averages from all available platforms.
 
 This document will briefly explain the following:
 
@@ -17,11 +18,11 @@ This document will briefly explain the following:
   - [Findings](#Findings)
   - [Further Studies](#Further-Studies)
   
-If the reader wishes to skip the nuances on the data collection, cleaning and model choices, please skip straight to the section Findings by clicking the above link.
+If the reader wishes to skip the nuances on data collection, cleaning and model choices, please skip straight to the section "Findings" by clicking the above link.
 
 ### Installation
 ----------------------------------
-##### Download the Source Data (optional)
+##### Download Source Data (optional)
   - rawg (https://rawg.io)
   - price chart (www.pricecharting.com)
   
@@ -31,13 +32,13 @@ If the reader wishes to skip the nuances on the data collection, cleaning and mo
 ##### Install the Requirements
   Install the requirements using ```pip install -r requirements.txt```
   
-  2 third-party packages are essential for this project:
-   - [Api Python Wrappers for rawg](rawg) 
-   - [Instruction on installing Glove-python](glove_python)
-   - Techinical reference on the GloVe model can be found [here](GloVe)
+  Two third-party packages are essential for this project:
+   - [API Python Wrappers for rawg](rawg) 
+   - [Instruction on installing glove-python](glove_python)
+  (Technical reference on the GloVe model can be found [here](GloVe))
    
 
-Please refer to the links above if you run into any problem.
+Please refer to the links above if you run into any problems.
 
 ### Data Description and Cleaning
 ----------------------------------
@@ -46,9 +47,9 @@ Please refer to the links above if you run into any problem.
 - CleanGameData_Final.ipynb
 
 ##### Prices
-  - All the prices are second hand for games sold either on ebay or pricecharts.com
-  - The source is a paid dataset from pricecharts.com. Please find [here](pricechartprice) for the price methodology.
-  - This project uses the "New Price" among other prices available in pricecharts
+  - All the prices are second hand for games sold either on ebay.com or pricecharting.com
+  - The source is a paid dataset from pricecharting.com. Please click [here](pricechartprice) for the price methodology.
+  - This project uses the "New Price" among other prices available on pricecharting.com
 
 ##### Outliers
 
@@ -60,19 +61,19 @@ Please refer to the links above if you run into any problem.
   
   
   
-    - [This game](neo), Neo Turf Masters, is an arcade style golf simulation game that was launched in 1996 by Nazca (before acquired by SNK). The game is apparently beloved by many and has been re-released on many up-to-date platforms including PS4 and Nintendo Switch. The average price is a whopping $50K among in the dataset while the mean price of all games is $24
-    - The price actually makes sense since the game in our database is probably the one with the original console (the aes system with home catridge) which is extremely rare and highly sought after. As a side note, the manual pamphlet alone on the AES system is listed about $1500 on [ebay](ebay)
+    - [This game](neo), Neo Turf Masters, is an arcade style golf simulation game that was launched in 1996 by Nazca (before acquired by SNK). The game is apparently beloved by many and has been re-released on many up-to-date platforms including PS4 and Nintendo Switch. The average price is a whopping $50K in the dataset while the median price of all games is $24
+    - The price actually makes sense since the game in our database is probably the one for the original console (the AES system) which is extremely rare and highly sought after. As a side note, the manual pamphlet alone on the game for the AES system was listed at $1499 on [ebay](ebay)
     
  
         <img src="pics/ebay_pic.PNG" align="center" style="height: 250px"/>    
 
-   - Both kinds of outliers have been filtered out using the inter-quatenile range method where any points beyond 1.5 times the 25-75 quantiles range are deleted.
+   - Both kinds of outliers have been filtered out using the inter-quartile range method where any points beyond 1.5 times the 25-75 quantiles range are deleted.
    
 ##### Features
-- Information on genres, tags, developers, platforms are obtained from rawg. One-hot encoding has been applied on the most common items for those information. Number of items in each features was also added as separate features
-- GloVe model was used to obtain word vectors. The goal was to learn useful information for game titles based on their context. For example, I would expect mario games to have similar prices. 2 different weights were used (mean and tfidf) as 2 substitutes for each other during validation
-- A feature called "best-sellers-similarity-score" was obtained by taking the minimum of the Euclidean distance between the sentence vector of the game and the ones of the best selling 500 games in the dataset ("sales-volumes" was used). Again, I am expecting that games such as legend of zelda or any relevant games in the series would be automatically sitting on a higher benchmark due to its successful ancestors
-- An average tfidf score was obtained for each game title as a substitute feature for the word vectors. tfidf is to only learn the significance of a game title by the word frequencies in all available titles in the dataset.
+- Information on genres, tags, developers, platforms are obtained from rawg. One-hot encoding has been applied on the most common items for those information. The number of items in each feature was also added as separate features
+- GloVe model was used to obtain word vectors. The goal was to learn useful information from game titles based on their context. For example, Mario games are expected to have more similar prices. Two different weights were used (mean and TFIDF) during validation
+- A feature called "best-sellers-similarity-score" was obtained by taking the minimum of the Euclidean distance between the sentence vector of the game and the sentence vectors of the best selling 500 games in the dataset ("sales-volumes" was used). Again, games from The Legend of Zelda series would automatically be expected to land a higher benchmark due to its successful ancestors
+- An average TFIDF score was obtained for each game title as a substitute feature for the word vectors. TFIDF is to learn the significance of a game title by only analyzing word frequencies among all available titles in the dataset.
 
 ### Models and Performance
 ----------------------------------
@@ -83,11 +84,11 @@ Please refer to the links above if you run into any problem.
 - Random Forest Regressor on a dataset using only the length of the game title as the relevant feature on the game titles (without English stopwords)
 
 ##### Models
-- Random Forest Regressor, XGBoost, SVR and Linear Regression (lasso) were chosen. I expect the former 3 would performa better as the data is essentially non-linear. 
-- 4 different datasets were explored: instead of the length of the title,"best-sellers-similarity-score" ("best") only, "best" plus mean word vectors, "best" plus tfidf weighted vectors, and "best" plus average tfidf score on the titles were included in the training, validation, and final assessment.
+- Random Forest Regressor, XGBoost, SVR and Linear Regression (lasso) were chosen. It is expected the former three would perform better as the data is essentially non-linear. 
+- Instead of the length of the title (baseline), four different datasets were explored: "best-sellers-similarity-score" ("best") only, "best" plus mean word vectors, "best" plus TFIDF weighted vectors, and "best" plus average TFIDF score on the titles.
 
 ##### Training/Validation/Test
-- As there are sufficient data, the dataset was randomly split into 60/20/20 for train, validation and test datasets. 
+- As there is sufficient data, the dataset was randomly split into 60/20/20 for train, validation and test datasets. 
 
 ### Findings
 ----------------------------------
@@ -106,8 +107,8 @@ Please find below the mean absolute error for each of the model other than the b
 |---- | --- | --- | --- | --- |
 |only Similarity Score    | 18.66      | 16.27  | 18.16 | 16.02
 |+mean word vectors   | 16.97 | 16.12 | 17.73| 16.15
-|+tfidf word vectors   | 16.92       | 16.54 |17.77|16.18|
-|+average tfidf score   | 17.88      | 16.4| 18.35| 16.28|
+|+TFIDF word vectors   | 16.92       | 16.54 |17.77|16.18|
+|+average TFIDF score   | 17.88      | 16.4| 18.35| 16.28|
 
 The standard deviation of the prediction error:
 
@@ -115,27 +116,27 @@ The standard deviation of the prediction error:
 |---- | --- | ---| --- | --- |
 |only Similarity Score    | 19.57      | 16.75  | 16.27 | 18.07
 |+mean word vectors   | 15.78 | 17.43 | 16.21| 18.41
-|+tfidf word vectors   | 15.51      | 16.1 |16.23|18.48|
-|+average tfidf score   | 17.61     | 17.53| 16.54| 18.65|
+|+TFIDF word vectors   | 15.51      | 16.1 |16.23|18.48|
+|+average TFIDF score   | 17.61     | 17.53| 16.54| 18.65|
 
-Finally, the best model is XGBoost on tfidf weighted word vectors due to its relatively low mean absolute error and standard deviation.
+Finally, the best model is XGBoost on TFIDF weighted word vectors due to its relatively low mean absolute error and standard deviation.
 
-It is worth noting that while the prediction works with some games, the errors are larger in more expensive games and ones that are more similar to best sellers in terms of titles -- in contrary to what I assumed.
+It is worth noting that while the prediction works with some games, the errors are larger in more expensive games and on ones with similar titles to best sellers -- in contrary to what was assumed.
 
 <img src="pics/absolute_error_by_price.png" align="center" style="height: 250px"/>  
 
 <img src="pics/sim_score_results.png" align="center" style="height: 250px"/> 
 
-This might help to explain why certain predictions on many big franchise names tend to have an above average error. As these games are popular, many titles were issued and some of them might not be so impressive (ex., assassin's creed 3 compared to its predecessors or the more recent versions such as origins or odysseys). More often than not, developers rush to meet the deadline, hoping that its good name in the past will help. 
+This might help to explain why certain predictions on many big franchise names tend to have an above average error. As these games are popular, many titles were issued and some of them might not be so impressive (ex., Assassin's Creed 3 compared to its predecessors or the more recent versions such as Origins or Odysseys). More often than not, developers rush to meet the deadline, hoping that its good name in the past will help. 
 
-Another reason of this wide price error range might be related to those companies issuing special editions on those popular titles for collectors (i.e., limited collections, collector's edition, etc) that up skews the price tag violently while a normal edition would cost much less and more in line with the general market. One example would be that "assassins creed brotherhood collectors edition" is on average at $64 while the normal edition is only $7. It seems that the "collector's value" or "vintage value" is a factor that is hard to assess correctly in this model.
+Another reason of this wide price error range might be related to those companies issuing special editions on popular titles for collectors (e.g., limited collections, collector's edition) that up skews the price tag significantly while a normal edition would cost much less and be more in line with the general market. One example would be that "Assassins Creed Brotherhood Collectors Edition" is on average $64 while the normal edition is only $7. It seems that the "collector's value" or "vintage value" is a factor that is hard to assess correctly in this model.
 
 ### Further Studies
 ----------------------------------
 - A better model/feature to predict the collector's value mentioned above
 - The word vector might be improved by learning through the description of the games
-- It might be worthy to separate game titles by platforms: a pokemon monster game on PS2 is a totally different title than the one on 3DS as PS2 console is almost obsolete
-- Improve the missing data : prices can be missing for a reason
+- It might be worthy to separate game titles by platforms: a pokemon monster game on PS2 is a totally different title than the one on 3DS as the PS2 console is almost obsolete
+- Improve the missing data : some prices can be missing for a unknown reason
 - Using a Stacking Ensemble model might provide some improvement
 
 

@@ -1,6 +1,6 @@
 # Price Prediction for Video Games
 
-This project provides machine-leaning based prediction of second-hand video game prices by using limited internet data sources. By using information such as genres and developer names, the algorithms are able to predict prices to a certain extent. Here are some results based on the best model: 
+This project provides machine-leaning based prediction of second-hand video game prices through internet data sources. By using information such as genres and developer names, it is possible to predict prices to a certain extent. Here are some results based on the best model: 
 
 
 | <img src="pics/fifa_18.jpg" align="center" style="height: 200px"/>        | <img src="pics/new_super_mario_bros.jpg" align="center" style="height: 200px"/>            |<img src="pics/assassins_creed_3.jpg" align="center" style="height: 200px"/> |
@@ -84,7 +84,7 @@ Please refer to the links above if you run into any problems.
 - Random Forest Regressor on a dataset using only the length of the game title as the relevant feature on the game titles (without English stopwords)
 
 ##### Models
-- Random Forest Regressor, XGBoost, SVR and Linear Regression (lasso) were chosen. It is expected the former three would perform better as the data is essentially non-linear. 
+- Random Forest Regressor, XGBoost, SVR, Multi-layer Perceptron (MLP) and Linear Regression (lasso)  were chosen. It is expected the former four would perform better as the data is essentially non-linear. 
 - Instead of the length of the title (baseline), four different datasets were explored: "best-sellers-similarity-score" ("best") only, "best" plus mean word vectors, "best" plus TFIDF weighted vectors, and "best" plus average TFIDF score on the titles.
 
 ##### Training/Validation/Test
@@ -103,23 +103,23 @@ The baseline models has a prediction mean absolute error of $16.35 and a standar
 
 Please find below the mean absolute error for each of the model other than the baseline after validation:
 
-|data/model | RF     | XGBoost      |Linear| SVR      |
-|---- | --- | --- | --- | --- |
-|only Similarity Score    | 18.66      | 16.27  | 18.16 | 16.02
-|+mean word vectors   | 16.97 | 16.12 | 17.73| 16.15
-|+TFIDF word vectors   | 16.92       | 16.54 |17.77|16.18|
-|+average TFIDF score   | 17.88      | 16.4| 18.35| 16.28|
+|data/model | RF     | XGBoost      |Linear| SVR      |MLP
+|---- | --- | --- | --- | --- |---|
+|only Similarity Score    | 18.66      | 16.27  | 18.16 | 16.02|16.61|
+|+mean word vectors   | 16.97 | 16.12 | 17.73| 16.15|16.23|
+|+TFIDF word vectors   | 16.92       | 16.54 |17.77|16.18|16.72|
+|+average TFIDF score   | 17.88      | 16.4| 18.35| 16.28|16.72|
 
 The standard deviation of the prediction error:
 
-|data/model | RF     | XGBoost      |Linear| SVR      |
-|---- | --- | ---| --- | --- |
-|only Similarity Score    | 19.57      | 16.75  | 16.27 | 18.07
-|+mean word vectors   | 15.78 | 17.43 | 16.21| 18.41
-|+TFIDF word vectors   | 15.51      | 16.1 |16.23|18.48|
-|+average TFIDF score   | 17.61     | 17.53| 16.54| 18.65|
+|data/model | RF     | XGBoost      |Linear| SVR      |MLP|
+|---- | --- | ---| --- | --- | --- |
+|only Similarity Score    | 19.57      | 16.75  | 16.27 | 18.07 |16.41|
+|+mean word vectors   | 15.78 | 17.43 | 16.21| 18.41 | 16.53 |
+|+TFIDF word vectors   | 15.51      | 16.1 |16.23|18.48| 15.81 |
+|+average TFIDF score   | 17.61     | 17.53| 16.54| 18.65| 16.67 |
 
-Finally, the best model is XGBoost on TFIDF weighted word vectors due to its relatively low mean absolute error and standard deviation.
+Finally, the best model is MLP on mean weighted word vectors due to its relatively low mean absolute error and standard deviation. From the results, it is noticeable that although MLP does not provide the best precision (mae) but it is more consistent than other estimators (low std across the board).
 
 It is worth noting that while the prediction works with some games, the errors are larger in more expensive games and on ones with similar titles to best sellers -- in contrary to what was assumed.
 
@@ -133,9 +133,10 @@ Another reason of this wide price error range might be related to those companie
 
 ### Further Studies
 ----------------------------------
-- A better model/feature to predict the collector's value mentioned above
-- The word vector might be improved by learning through the description of the games
-- It might be worthy to separate game titles by platforms: a pokemon monster game on PS2 is a totally different title than the one on 3DS as the PS2 console is almost obsolete
+- A better model/feature to predict the collector's value mentioned above. 
+- A set of enhanced features. There are too many features now (over 150). Smart feature engineering seems to be much more important than complicated models since the current results do not differ a lot among the various models. 
+- The word vector might be improved by learning through the description of the games. This feature will require additional time to obtain from the api source.
+- It might be worthy to separate game titles by platforms: a Pokemon Monster game on PS2 is a totally different title than the one on 3DS as the PS2 console is almost obsolete
 - Improve the missing data : some prices can be missing for a unknown reason
 - Using a Stacking Ensemble model might provide some improvement
 
